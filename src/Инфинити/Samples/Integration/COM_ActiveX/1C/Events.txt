@@ -1,0 +1,113 @@
+http://v8.1c.ru/overview/release_8_1_5/main1pic1.htm
+http://help1c.com/suffix/view/22.html
+
+
+
+Перем Srv;
+Перем UsersMngm;
+
+&НаКлиенте
+Процедура СоздатьОбъект(Команда)
+   
+   Srv = Новый COMОбъект("Cx.Integration.Core");
+   
+   Srv.SetUseExceptions(Ложь);
+   
+   Login = "Администратор";
+   Password = "";
+   
+   LogonResult = Srv.LogonEx(Login, Password, "20000", "127.0.0.1", 10010);
+   
+   Если Не (Srv.IsConnected) Тогда 
+      Сообщить(Srv.LogonResultToString(LogonResult));
+   Иначе 
+      Сообщить("Соединение установлено.");
+
+
+      // 1.              
+   
+      UsersMngm = Srv.GetUsersManagement();      
+      
+      ДобавитьОбработчик UsersMngm.StateChanged, UsersOnStateChanged;
+
+
+      //2.
+
+        CallMngm = Srv.GetCallManagement("201201");
+    	Сообщить(Srv.LastError);
+		
+
+		ДобавитьОбработчик CallMngm.StateChanged, CMOnStateChanged;
+		
+//		ДобавитьОбработчик CallMngm.CallCreated, OnCallCreated;
+//		ДобавитьОбработчик CallMngm.CallDeleted, CallDeleted;
+//		ДобавитьОбработчик CallMngm.ExtensionStateChanged, ExtensionStateChanged;
+//		ДобавитьОбработчик CallMngm.Disposed, Disposed;
+//		ДобавитьОбработчик CallMngm.NumberChanged, NumberChanged;
+//		ДобавитьОбработчик CallMngm.NameChanged, NameChanged;
+//		ДобавитьОбработчик CallMngm.DialedNumberChanged, DialedNumberChanged;
+//		ДобавитьОбработчик CallMngm.CommandsStateChanged, CommandsStateChanged;
+//		ДобавитьОбработчик CallMngm.DigitsSent, DigitsSent;
+//		ДобавитьОбработчик CallMngm.AbonentCallInfoChanged, AbonentCallInfoChanged;
+      
+   КонецЕсли;
+   
+КонецПроцедуры
+
+
+
+&НаКлиенте
+Процедура UsersOnStateChanged(User, OldState, State)
+   
+   Сообщить(State);
+      
+КонецПроцедуры
+
+
+
+
+&НаКлиенте
+Процедура CMOnStateChanged(Call, OldState, State)
+	
+	Сообщить(State);
+		
+КонецПроцедуры
+
+
+
+&НаКлиенте
+Процедура OnCallCreated(Call)
+КонецПроцедуры
+&НаКлиенте
+Процедура CallDeleted(Call)
+КонецПроцедуры
+&НаКлиенте
+Процедура ExtensionStateChanged(Extension,State)
+КонецПроцедуры
+&НаКлиенте
+Процедура Disposed()
+КонецПроцедуры
+&НаКлиенте
+Процедура NumberChanged(Call)
+КонецПроцедуры
+&НаКлиенте
+Процедура NameChanged(Call)
+КонецПроцедуры
+&НаКлиенте
+Процедура DialedNumberChanged(Call)
+КонецПроцедуры
+&НаКлиенте
+Процедура CommandsStateChanged(Call)
+КонецПроцедуры
+&НаКлиенте
+Процедура DigitsSent(Call, digits)
+КонецПроцедуры
+&НаКлиенте
+Процедура AbonentCallInfoChanged(Call)
+КонецПроцедуры
+
+
+
+
+
+

@@ -1,0 +1,139 @@
+-- Table: "Table_5004764017"
+
+-- DROP TABLE "Table_5004764017";
+
+CREATE TABLE "Table_5004764017"
+(
+  "ID" bigint NOT NULL,
+  "State" integer,
+  "Телефон" text,
+  "Информация" text,
+  CONSTRAINT "Table_5004764017_pkey" PRIMARY KEY ("ID")
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE "Table_5004764017" OWNER TO cxdbuser;
+
+-- Table: "Table_5004431691"
+
+-- DROP TABLE "Table_5004431691";
+
+CREATE TABLE "Table_5004431691"
+(
+  "ID" bigint NOT NULL,
+  "State" integer,
+  "ФИО" text,
+  "Телефон" text,
+  "Обработан" text,
+  "Дата" timestamp without time zone,
+  CONSTRAINT "Table_5004431691_pkey" PRIMARY KEY ("ID")
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE "Table_5004431691" OWNER TO cxdbuser;
+
+
+СтрокаПодключения = СтрокаПодключения();
+	
+	Connection  = Новый COMОбъект("ADODB.Connection");
+	Command  = Новый COMОбъект("ADODB.Command");
+	
+	RecordSet  = Новый COMОбъект("ADODB.RecordSet");
+	
+	
+	//Пока RecordSet.EOF = Ложь Цикл
+	//	//Строка = ТЗ.Добавить();
+	//	//Строка.НоменклатураКод = RecordSet.Fields(RecordSet.Fields.Item(1).Name).Value;
+	//	//Строка.Qnty = RecordSet.Fields(RecordSet.Fields.Item(12).Name).Value;
+	//	//Строка.Период = RecordSet.Fields(RecordSet.Fields.Item(13).Name).Value;
+	//	RecordSet.MoveNext();
+	//КонецЦикла;
+	//
+	
+	Connection.Open(СокрЛП(СтрокаПодключения));
+	Command.ActiveConnection   = Connection;
+	
+	ЕстьОшибкиВставки = Ложь;
+	
+	Для каждого ТекСтрока Из ТаблицаОбзвоны Цикл
+		
+		//Command.CommandText = "INSERT INTO AutoInformatorInfinity(tel, text, idstr, idreg, idcomp)"+
+		Command.CommandText = 
+		
+		"_INSERT_RECORD_AutoInformatorInfinity("+"'"+ТекСтрока.ТелефонДляНабора+"','"+ТекСтрока.ТекстОбзвона+"','"+ТекСтрока.ИдентификаторСтроки+ "','"+Строка(Новый УникальныйИдентификатор)+"','" +"5004764026"+"')";
+		
+		Попытка
+			
+			RecordSet = Command.Execute();
+			
+		Исключение
+			
+			ТекстОшибки = ОписаниеОшибки();
+			
+			//Возврат ТЗ;
+		КонецПопытки;
+		
+		
+		//INSERT
+		//Попытка
+		//	
+		//	ВнешниеИсточникиДанных.Инфинити_БазаДанныхДляОбзвона._INSERT_RECORD_AutoInformatorInfinity(
+		//	
+		//	ТекСтрока.ТелефонДляНабора,
+		//	ТекСтрока.ТекстОбзвона,
+		//	ТекСтрока.ИдентификаторСтроки,
+		//	Строка(Объект.Ссылка.УникальныйИдентификатор()), 
+		//	"5004764026"
+		//				
+		//	);
+		//	
+		//Исключение
+		//	
+		//	ТекстОшибки = ОписаниеОшибки();
+		//	
+		//	ЕстьОшибкиВставки = Истина;
+		//	
+		//КонецПопытки;
+		
+		//DELETE
+		//	ВнешниеИсточникиДанных.Инфинити_БазаДанныхДляОбзвона._DELETE_RECORD_AutoInformatorInfinity(
+		//
+		//	Строка(Объект.Ссылка.УникальныйИдентификатор()), 
+		//				
+		//	);
+
+
+
+		
+			
+	//СтрокаПодключения = "Provider=SQLOLEDB.1;Persist Security Info=True;User ID=User1C;Pwd=1q2!Q@1q2;Data Source=tmn-snc-1cdb2.snc.local;Use Procedure for Prepare=1;Auto Translate=True;Packet Size=4096;Workstation ID=;Use Encryption for Data=False;Tag with column collation when possible=False;Initial Catalog=AutoInformatorInfinity";
+	//Connection  = Новый COMОбъект("ADODB.Connection");
+	//Command  = Новый COMОбъект("ADODB.Command");
+	//RecordSet  = Новый COMОбъект("ADODB.RecordSet");
+	//Дата = "";
+	//Попытка
+	//	Connection.Open(СокрЛП(СтрокаПодключения));
+	//	Command.ActiveConnection   = Connection;
+	//	Command.CommandText = "Select * from _V_AutoInformatorInfinity";
+	//	RecordSet = Command.Execute();
+	//	RecordSet.MoveFirst();
+	//Исключение
+	//	//Возврат ТЗ;
+	//КонецПопытки;
+	//
+	//Пока RecordSet.EOF = Ложь Цикл
+	//	//Строка = ТЗ.Добавить();
+	//	//Строка.НоменклатураКод = RecordSet.Fields(RecordSet.Fields.Item(1).Name).Value;
+	//	//Строка.Qnty = RecordSet.Fields(RecordSet.Fields.Item(12).Name).Value;
+	//	//Строка.Период = RecordSet.Fields(RecordSet.Fields.Item(13).Name).Value;
+	//	RecordSet.MoveNext();
+	//КонецЦикла;
+	//
+	//
+
+
+
+
+
